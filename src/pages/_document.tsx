@@ -1,4 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document';
+import Script from 'next/script';
 
 import { AppConfig } from '../utils/AppConfig';
 
@@ -9,18 +10,20 @@ class MyDocument extends Document {
     return (
       <Html lang={AppConfig.locale}>
         <Head>
-          <script
-            async
+          <Script
+            type="text/javascript"
+            strategy="afterInteractive"
             src="https://www.googletagmanager.com/gtag/js?id=G-VSJN50B1NL"
-          ></script>
-          <script>
+          ></Script>
+          <Script id="google-analytics" strategy="afterInteractive">
             {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-VSJN50B1NL');`}
-          </script>
+            gtag('config', 'G-VSJN50B1NL');
+            `}
+          </Script>
         </Head>
         <body>
           <Main />
